@@ -131,7 +131,62 @@ def merge_in_place(arr, start, mid, end):
 
 
 def merge_sort_in_place(arr, l, r):
-    # Your code here
+    # Base case
+    if len(arr) > 1: 
+
+        # Grab the middle index of the array
+        mid = len(arr) // 2
+
+        # Separate arr into two lists 
+        left = arr[:mid]
+        right = arr[mid:]
+        print("Divided a list")
+
+        # For each list, use the merge function
+        merge_sort(left)  # By the time this gets done, it will be a sorted list
+        merge_sort(right) # By the time this gets done, it will be a sorted list
+        
+        # Set index value for the list to the left, and the list to the right
+        i = 0   # Current index in left
+        j = 0   # Current index in right
+        
+        # Set index for arr, to insert the new values
+        x = 0
+        
+        # Compare left[i] with righ[j]
+        # While i is less than the length of left AND j is less than the length of right
+        while i < len(left) and j < len(right):
+            
+            # if left[0] is smaller than right[0]
+            if left[i] < right[j]:
+                # Set the element at arr[0] as left[0]
+                arr[x] = left[i]
+                
+                # Increment index of both left and arr
+                i += 1      # So we ignore the previous index from now on
+                x += 1      # So we can add items to next index
+
+            # else
+            else:
+                # Set arr[0] as right[0]
+                arr[x] = right[j]
+
+                # Increment index of both right and arr
+                j += 1      # So we ignore the previous index from now on
+                x += 1      # So we can add items to next index
+
+        # Make sure we add whatever items are left in each array
+        while i < len(left):
+            arr[x] = left[i]
+        
+            i += 1
+            x += 1
+
+        while j < len(right):
+            arr[x] = right[j]
+        
+            j += 1
+            x += 1
 
 
     return arr
